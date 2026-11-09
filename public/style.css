@@ -1,0 +1,205 @@
+/* PGPC Event Registration – one stylesheet for every page.
+   Colours come from variables so the Light / Dark / High-contrast themes and the accessibility
+   options (text size, spacing, large targets...) work everywhere. Sizes use rem so text-size scaling works. */
+:root {
+  --bg: #f2f7ff; --card: #fff; --ink: #0f2347; --mute: #51648a; --line: #c3d3ee; --ctl: #6b7fa6;
+  --pri: #1f4fb2; --pri-dark: #163b8a; --pri-ink: #fff; --soft: #e8f0ff; --accent: #8bb8ff;
+  --ok: #1f7a4d; --bad: #b3261e; --focus: #0f2347; --hd1: #163b8a; --hd2: #2b66d9; --hd-ink: #fff;
+  --page: linear-gradient(160deg, #163b8a 0%, #2b66d9 55%, #dbe8ff 55%, #f2f7ff 100%);
+  --bw: 1px; --pad: .65rem; --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; --serif: Georgia, serif;
+  color-scheme: light;
+}
+html[data-theme="dark"] {
+  --bg: #0b1426; --card: #14213d; --ink: #e8eefc; --mute: #adbbdb; --line: #2c3f66; --ctl: #8da2cc;
+  --pri: #8bb8ff; --pri-dark: #b5d2ff; --pri-ink: #0b1426; --soft: #1c2d52; --accent: #8bb8ff;
+  --ok: #6fe0a1; --bad: #ff9c94; --focus: #ffd54a; --hd1: #0f1f3d; --hd2: #1a3a7a; --hd-ink: #fff;
+  --page: #0b1426; color-scheme: dark;
+}
+html[data-theme="contrast"] {
+  --bg: #000; --card: #000; --ink: #fff; --mute: #fff; --line: #fff; --ctl: #fff;
+  --pri: #ffe600; --pri-dark: #fff27a; --pri-ink: #000; --soft: #1a1a1a; --accent: #ffe600;
+  --ok: #7dffb3; --bad: #ffa3a3; --focus: #ffe600; --hd1: #000; --hd2: #000; --hd-ink: #fff;
+  --page: #000; --bw: 2px; color-scheme: dark;
+}
+* { box-sizing: border-box }
+html { font-size: 100%; -webkit-text-size-adjust: 100% }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 1rem/1.55 var(--font); min-height: 100vh }
+body.center { background: var(--page) fixed; display: flex; flex-direction: column; align-items: center; padding: 0 1rem 2rem }
+body.center main { margin-top: 1rem }
+[hidden] { display: none !important }
+img { max-width: 100% }
+h1, h2, h3 { line-height: 1.25 }
+h1 { font: 700 1.5rem/1.25 var(--serif); margin: 0 0 .4rem }
+h2 { font: 700 1.2rem var(--serif); margin: 0 0 .75rem }
+h3 { margin: 0 0 .25rem; font-size: 1.05rem }
+a { color: var(--pri) }
+html[data-theme="light"] a { color: var(--pri) }
+main:focus, [tabindex="-1"]:focus { outline: none }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: 4px }
+
+.sr-only { position: absolute !important; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0 }
+.skip { position: absolute; left: .5rem; top: -4rem; z-index: 100; background: var(--card); color: var(--ink); padding: .6rem 1rem; border: 2px solid var(--focus); border-radius: 8px; font-weight: 700 }
+.skip:focus { top: .5rem }
+
+/* top strip: accessibility button + sign-in state */
+.topbar { width: 100%; background: var(--card); border-bottom: var(--bw) solid var(--line); font-size: .9rem }
+.topbar .in { max-width: 980px; margin: 0 auto; padding: .4rem 1rem; display: flex; gap: .75rem; justify-content: space-between; align-items: center; flex-wrap: wrap }
+.topbar .who { display: flex; gap: .6rem; align-items: center; flex-wrap: wrap }
+.role { display: inline-block; font-size: .72rem; font-weight: 700; padding: .1rem .55rem; border-radius: 999px; background: var(--soft); color: var(--pri); border: var(--bw) solid var(--line) }
+body.center .topbar { margin: 0 -1rem; width: calc(100% + 2rem) }
+
+header.site { background: linear-gradient(135deg, var(--hd1), var(--hd2)); color: var(--hd-ink); padding: 1.2rem 1rem; border-bottom: 4px solid var(--accent) }
+header.site .wrap { display: flex; align-items: center; gap: .9rem; padding: 0 }
+header.site p { margin: 0; opacity: .9; font-size: .88rem }
+header.site .logo { width: 3rem; height: 3rem; margin: 0 }
+.wrap { max-width: 980px; margin: 0 auto; padding: 0 1rem }
+.logo { width: 6rem; height: 6rem; border-radius: 50%; object-fit: cover; background: var(--soft); border: 3px solid var(--soft); margin: 0 auto 1rem; display: block; flex: none }
+
+.menubar { position: sticky; top: 0; z-index: 20; background: var(--card); border-bottom: var(--bw) solid var(--line); box-shadow: 0 2px 10px rgba(31, 79, 178, .1) }
+.menubar .wrap { display: flex; align-items: center; justify-content: space-between }
+#burger { display: none; border: 0; background: transparent; color: var(--pri); font: inherit; font-weight: 700; padding: .9rem 0; min-height: 2.75rem; cursor: pointer }
+nav.menu { display: flex; gap: 2px; flex-wrap: wrap }
+nav.menu a { display: inline-flex; align-items: center; min-height: 2.9rem; padding: 0 1rem; border-bottom: 3px solid transparent; color: var(--mute); text-decoration: none; font-weight: 600; font-size: .95rem }
+nav.menu a:hover { background: var(--soft); color: var(--pri) }
+nav.menu a[aria-current="page"] { color: var(--pri); border-bottom-color: var(--pri) }
+main.wrap { padding-top: 1.4rem; padding-bottom: 1rem }
+main section { scroll-margin-top: 4.5rem }
+footer.site { color: var(--mute); text-align: center; font-size: .85rem; padding: 1.8rem 1rem }
+
+@media (max-width: 640px) {
+  #burger { display: flex; align-items: center; gap: .5rem }
+  nav.menu { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; background: var(--card); border-bottom: var(--bw) solid var(--line); box-shadow: 0 8px 14px rgba(31, 79, 178, .12) }
+  nav.menu.open { display: flex }
+  nav.menu a { border-bottom: 0; border-left: 4px solid transparent; padding: 0 1.25rem }
+  nav.menu a[aria-current="page"] { border-left-color: var(--pri); background: var(--soft) }
+}
+
+/* centred panels (main menu, login) */
+.panel { width: 100%; max-width: 520px; background: var(--card); border-radius: 20px; border-top: 6px solid var(--accent); box-shadow: 0 20px 50px rgba(15, 35, 71, .25); padding: 2rem 1.6rem 1.7rem; text-align: center }
+html[data-theme="contrast"] .panel { border: 2px solid #fff; border-top: 6px solid var(--accent) }
+.panel h1 { color: var(--pri-dark) }
+.panel form, .panel .stack { text-align: left }
+.sub { margin: 0 0 1.4rem; color: var(--mute) }
+.hint { margin: 0; font-size: .82rem; color: var(--mute); font-weight: 400 }
+.stack { display: grid; gap: .75rem }
+.links { margin-top: 1.1rem; font-size: .9rem }
+
+/* buttons */
+.btn, .go { display: inline-flex; align-items: center; justify-content: center; gap: .6rem; min-height: 2.75rem; padding: .55rem 1.1rem; border-radius: 10px; border: var(--bw) solid var(--pri); background: var(--pri); color: var(--pri-ink); font: inherit; font-weight: 700; text-decoration: none; cursor: pointer; transition: background .15s, transform .15s }
+.go { width: 100%; padding: .9rem 1.2rem; font-size: 1.08rem; border-radius: 12px }
+.btn:hover, .go:hover { background: var(--pri-dark); border-color: var(--pri-dark) }
+.btn:active, .go:active { transform: scale(.98) }
+.btn.ghost, .go.ghost { background: transparent; color: var(--pri) }
+.btn.ghost:hover, .go.ghost:hover { background: var(--soft); border-color: var(--pri) }
+.btn.danger { background: var(--bad); border-color: var(--bad); color: #fff }
+html[data-theme="dark"] .btn.danger, html[data-theme="contrast"] .btn.danger { color: #000 }
+.btn.ghost.danger { background: transparent; color: var(--bad) }
+.btn.sm { min-height: 2.25rem; padding: .25rem .7rem; font-size: .85rem }
+.btn:disabled, .btn[aria-disabled="true"] { background: var(--soft); color: var(--mute); border-color: var(--ctl); border-style: dashed; cursor: not-allowed; transform: none }
+.actions { display: flex; gap: .6rem; flex-wrap: wrap; align-items: center }
+.actions.end { justify-content: flex-end; margin-top: .5rem }
+
+/* forms */
+form { display: grid; gap: .8rem }
+.field { display: grid; gap: .25rem }
+label, legend { font-size: .88rem; font-weight: 600 }
+.req { color: var(--bad) }
+input, select, textarea { font: inherit; padding: .6rem .65rem; min-height: 2.75rem; border: var(--bw) solid var(--ctl); border-radius: 8px; background: var(--card); color: var(--ink); width: 100% }
+input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px solid var(--focus); outline-offset: 1px }
+input[aria-invalid="true"], select[aria-invalid="true"], textarea[aria-invalid="true"] { border: 2px solid var(--bad) }
+input[type="checkbox"], input[type="radio"] { width: 1.25rem; height: 1.25rem; min-height: 0; padding: 0; accent-color: var(--pri) }
+label.check { display: flex; gap: .55rem; align-items: center; font-weight: 400; font-size: .92rem; min-height: 2rem }
+.err { color: var(--bad); font-size: .85rem; font-weight: 600; margin: 0; min-height: 0 }
+.err:empty { display: none }
+.err::before { content: "⚠ "; }
+.err:empty::before { content: "" }
+.errsum { border: 2px solid var(--bad); border-radius: 10px; padding: .75rem 1rem; background: var(--card) }
+.errsum h2 { font: 700 1rem var(--font); color: var(--bad); margin: 0 0 .3rem }
+.errsum ul { margin: 0; padding-left: 1.2rem }
+.row { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem }
+fieldset { border: var(--bw) solid var(--line); border-radius: 10px; margin: 0; padding: .6rem .9rem .8rem }
+.formbox { max-width: 600px }
+
+/* cards, lists, tables */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem }
+.card { background: var(--card); border: var(--bw) solid var(--line); border-radius: 12px; padding: 1rem; display: flex; flex-direction: column; gap: .15rem }
+.card .actions { margin-top: auto; padding-top: .75rem }
+.meta { color: var(--mute); font-size: .88rem; margin: .1rem 0 }
+.badge { display: inline-block; font-size: .75rem; font-weight: 700; padding: .1rem .6rem; border-radius: 999px; background: var(--soft); color: var(--ink); border: var(--bw) solid var(--line); margin-right: .3rem }
+.badge.full { background: var(--bad); color: #fff; border-color: var(--bad) }
+html[data-theme="dark"] .badge.full, html[data-theme="contrast"] .badge.full { color: #000 }
+progress { width: 100%; height: .6rem; accent-color: var(--pri); margin: .3rem 0 0 }
+.empty { color: var(--mute); padding: 1.5rem; text-align: center }
+.ok { background: var(--card); border: 1px solid var(--ok); border-left: 6px solid var(--ok); border-radius: 10px; padding: .9rem 1rem; margin-top: 1rem; max-width: 600px }
+.ok h2 { color: var(--ok); font: 700 1.1rem var(--font); margin: 0 0 .3rem }
+.code { font: 700 1.2rem ui-monospace, Menlo, Consolas, monospace; letter-spacing: .05em }
+.tools { display: flex; gap: .6rem; flex-wrap: wrap; align-items: end; margin-bottom: .8rem }
+.tools .field { min-width: 12rem; flex: 1 1 12rem; max-width: 18rem }
+.stats { display: flex; gap: .8rem; flex-wrap: wrap; margin-bottom: 1rem }
+.stat { background: var(--card); border: var(--bw) solid var(--line); border-radius: 12px; padding: .6rem 1.1rem; font-size: .85rem; color: var(--mute) }
+.stat b { display: block; font-size: 1.5rem; color: var(--pri) }
+.tbl { overflow-x: auto; border: var(--bw) solid var(--line); border-radius: 12px; background: var(--card) }
+table { width: 100%; border-collapse: collapse; font-size: .9rem }
+th, td { text-align: left; padding: var(--pad) .8rem; border-bottom: var(--bw) solid var(--line); vertical-align: middle }
+td.nw, th.nw { white-space: nowrap }
+tbody tr:last-child td, tbody tr:last-child th { border-bottom: 0 }
+th { background: var(--soft); font-size: .8rem; color: var(--ink) }
+th button { all: unset; cursor: pointer; font-weight: 700; display: inline-flex; gap: .3rem; align-items: center; padding: .15rem .3rem; border-radius: 4px }
+th button:focus-visible { outline: 3px solid var(--focus) }
+th button .ar { color: var(--mute); font-size: .7rem }
+td .actions { flex-wrap: nowrap }
+.a-compact { --pad: .2rem }
+.a-compact table { font-size: .82rem }
+
+/* admin tabs */
+.tabs { display: flex; gap: 2px; border-bottom: var(--bw) solid var(--line); margin-bottom: 1.1rem; flex-wrap: wrap }
+.tabs [role="tab"] { border: 0; border-bottom: 3px solid transparent; background: transparent; color: var(--mute); font: inherit; font-weight: 700; padding: .55rem 1rem; min-height: 2.75rem; cursor: pointer }
+.tabs [role="tab"]:hover { color: var(--pri); background: var(--soft) }
+.tabs [role="tab"][aria-selected="true"] { color: var(--pri); border-bottom-color: var(--pri) }
+.bar2 { display: flex; justify-content: space-between; align-items: center; gap: .75rem; flex-wrap: wrap; margin-bottom: .8rem }
+.bar2 h2 { margin: 0 }
+kbd { font: .8rem ui-monospace, Menlo, Consolas, monospace; background: var(--soft); border: var(--bw) solid var(--ctl); border-bottom-width: 2px; border-radius: 5px; padding: 0 .4rem }
+.keys { display: grid; grid-template-columns: auto 1fr; gap: .4rem 1rem; align-items: center; margin: 0 }
+.keys dt { text-align: right } .keys dd { margin: 0 }
+.danger-zone { border: 2px solid var(--bad); border-radius: 12px; padding: 1rem }
+
+/* dialogs */
+dialog { border: var(--bw) solid var(--line); border-radius: 16px; padding: 0; width: min(560px, 94vw); max-height: 92vh; background: var(--card); color: var(--ink); box-shadow: 0 20px 60px rgba(0, 0, 0, .35) }
+dialog::backdrop { background: rgba(8, 16, 36, .6) }
+dialog > form, dialog > .dlg { padding: 1.3rem 1.4rem 1.2rem; max-height: 92vh; overflow: auto }
+dialog h2 { margin-top: 0 }
+
+#toast { position: fixed; left: 50%; bottom: calc(1.2rem + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--ink); color: var(--bg); padding: .65rem 1.1rem; border-radius: 8px; opacity: 0; pointer-events: none; transition: opacity .2s; font-size: .92rem; z-index: 200; max-width: 92vw; border: 2px solid var(--bg) }
+#toast.show { opacity: 1 }
+
+/* ----- accessibility options (switched on by the Accessibility panel) ----- */
+.a-font-readable { --font: "Atkinson Hyperlegible", Verdana, "Trebuchet MS", Tahoma, sans-serif; --serif: Verdana, "Trebuchet MS", sans-serif }
+.a-space body { line-height: 1.9; letter-spacing: .04em; word-spacing: .12em }
+.a-space p, .a-space li { max-width: 70ch }
+.a-links a { text-decoration: underline !important; text-underline-offset: .18em }
+.a-targets .btn, .a-targets .go, .a-targets nav.menu a, .a-targets input, .a-targets select, .a-targets .tabs [role="tab"] { min-height: 3.25rem }
+.a-targets .btn.sm { min-height: 3rem; padding: .4rem 1rem }
+.a-targets input[type="checkbox"], .a-targets input[type="radio"] { width: 1.6rem; height: 1.6rem }
+.a-targets td .actions { gap: .8rem }
+.a-reduce *, .a-reduce *::before, .a-reduce *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; scroll-behavior: auto !important } }
+@media (max-width: 520px) { .row { grid-template-columns: 1fr } .panel { padding: 1.5rem 1rem } }
+@media print { .topbar, .menubar, .skip, #toast, .actions, dialog { display: none !important } body { background: #fff; color: #000 } }
+tbody th[scope="row"] { background: none; font-weight: 600; font-size: inherit; color: var(--ink) }
+
+/* ----- readability in every theme (all text/background pairs meet WCAG AA, 4.5:1) ----- */
+::placeholder { color: var(--mute); opacity: 1 }
+::selection { background: var(--pri); color: var(--pri-ink) }
+option, optgroup { background: var(--card); color: var(--ink) }
+/* Browsers paint autofilled fields yellow/blue with their own text colour; keep ours readable. */
+input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, textarea:-webkit-autofill, select:-webkit-autofill {
+  -webkit-text-fill-color: var(--ink); caret-color: var(--ink); box-shadow: 0 0 0 100rem var(--card) inset; transition: background-color 9999s }
+code { font: .85em ui-monospace, Menlo, Consolas, monospace; background: var(--soft); color: var(--ink); border: var(--bw) solid var(--line); border-radius: 5px; padding: 0 .3rem }
+/* Text that sits directly on the page gradient (not inside a card) always uses the header colours. */
+body.center > .panel, body.center > .topbar { color: var(--ink) }
+th button { color: var(--ink) }
+.btn.ghost.danger:hover { color: var(--bad) }
+.btn.danger:hover { color: var(--pri-ink) }
+html[data-theme="dark"] .btn.danger:hover, html[data-theme="contrast"] .btn.danger:hover { color: var(--pri-ink) }
+.role, .badge { color: var(--ink) }
+.stat b { color: var(--pri-dark) }

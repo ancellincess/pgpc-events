@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Admin dashboard – PGPC Event Registration</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="common.js"></script>
+    <script src="admin.js" defer></script>
+</head>
+<body>
+    <a class="skip" href="#main">Skip to main content</a>
+    <div class="topbar" id="topbar"></div>
+    <header class="site">
+        <div class="wrap">
+            <img class="logo" src="LOGO.jpg" alt="">
+            <div>
+                <p style="font:700 1.3rem Georgia,serif;opacity:1">Padre Garcia Polytechnic College</p>
+                <p>Event Registration – Administration</p>
+            </div>
+        </div>
+    </header>
+    <main class="wrap" id="main" tabindex="-1">
+        <div id="gate" hidden></div>
+        <div id="app" hidden>
+            <div class="bar2">
+                <h1 id="h-admin" style="margin:0">Admin dashboard</h1>
+                <div class="actions">
+                    <a class="btn ghost sm" href="Events.html">View public events page</a>
+                    <a class="btn ghost sm" href="/db">Database viewer</a>
+                    <button class="btn ghost sm" type="button" id="help">Keyboard shortcuts</button>
+                </div>
+            </div>
+            <div class="tabs" role="tablist" aria-label="Admin sections" id="tabs"></div>
+
+            <section id="p-events" role="tabpanel" aria-labelledby="tab-events" tabindex="0">
+                <div class="bar2"><h2 id="h-events" tabindex="-1">Events</h2><button class="btn" type="button" id="add-ev">＋ Add event</button></div>
+                <div id="evtbl"></div>
+            </section>
+
+            <section id="p-regs" role="tabpanel" aria-labelledby="tab-regs" tabindex="0" hidden>
+                <div class="bar2"><h2 id="h-regs" tabindex="-1">Registrations</h2>
+                    <div class="actions"><button class="btn" type="button" id="add-reg">＋ Add registration</button><a class="btn ghost" href="/api/registrations.csv" download>⬇ Export CSV</a></div></div>
+                <div class="stats" id="rstats"></div>
+                <div class="tools" role="search" aria-label="Filter registrations" id="rtools"></div>
+                <p class="meta" id="rcount" role="status"></p>
+                <div id="rtbl"></div>
+            </section>
+
+            <section id="p-users" role="tabpanel" aria-labelledby="tab-users" tabindex="0" hidden>
+                <div class="bar2"><h2 id="h-users" tabindex="-1">Accounts</h2></div>
+                <div id="utbl"></div>
+            </section>
+
+            <section id="p-acct" role="tabpanel" aria-labelledby="tab-acct" tabindex="0" hidden>
+                <div id="accbox"></div>
+            </section>
+        </div>
+    </main>
+    <footer class="site">© Padre Garcia Polytechnic College · Event Registration System</footer>
+</body>
+</html>

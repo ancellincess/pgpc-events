@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Events – PGPC Event Registration</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="common.js"></script>
+    <script src="events.js" defer></script>
+</head>
+<body>
+    <a class="skip" href="#main">Skip to main content</a>
+    <div class="topbar" id="topbar"></div>
+    <header class="site">
+        <div class="wrap">
+            <img class="logo" src="LOGO.jpg" alt="">
+            <div>
+                <p style="font:700 1.3rem Georgia,serif;opacity:1">Padre Garcia Polytechnic College</p>
+                <p>School Event Registration</p>
+            </div>
+        </div>
+    </header>
+    <div class="menubar">
+        <div class="wrap">
+            <button id="burger" type="button" aria-expanded="false" aria-controls="nav"><span aria-hidden="true">☰</span> Menu</button>
+            <nav id="nav" class="menu" aria-label="Main menu"></nav>
+        </div>
+    </div>
+    <main class="wrap" id="main" tabindex="-1">
+        <section id="v-events" aria-labelledby="h-events">
+            <h1 id="h-events" tabindex="-1">School events</h1>
+            <div class="tools" role="search" aria-label="Filter events" id="evtools"></div>
+            <p class="meta" id="evcount" role="status"></p>
+            <div id="evlist"></div>
+        </section>
+        <section id="v-register" aria-labelledby="h-register" hidden>
+            <h1 id="h-register" tabindex="-1">Register for an event</h1>
+            <div id="regbox"></div>
+        </section>
+        <section id="v-mine" aria-labelledby="h-mine" hidden>
+            <h1 id="h-mine" tabindex="-1">My registrations</h1>
+            <div id="minebox"></div>
+        </section>
+        <section id="v-account" aria-labelledby="h-account" hidden>
+            <h1 id="h-account" tabindex="-1">My account</h1>
+            <div id="accbox"></div>
+        </section>
+    </main>
+    <footer class="site">© Padre Garcia Polytechnic College · Event Registration System</footer>
+</body>
+</html>

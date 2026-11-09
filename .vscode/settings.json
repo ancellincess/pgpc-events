@@ -1,0 +1,16 @@
+{
+  "sqltools.connections": [
+    {
+      "name": "PGPC (PostgreSQL)",
+      "driver": "PostgreSQL",
+      "server": "localhost",
+      "port": 5432,
+      "database": "pgpc",
+      "username": "postgres",
+      "password": "postgres",
+      "connectionTimeout": 15
+    }
+  ],
+  "sqltools.useNodeRuntime": true,
+  "files.associations": { "*.sql": "sql" }
+}

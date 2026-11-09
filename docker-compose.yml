@@ -1,0 +1,17 @@
+# Optional: a ready-made PostgreSQL server (only needs Docker). Start with:  docker compose up -d
+# Skip this file if you already have PostgreSQL installed – just point DATABASE_URL in .env at it.
+services:
+  db:
+    image: postgres:16
+    container_name: pgpc-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 090906
+      POSTGRES_DB: pgpc
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgpc_data:/var/lib/postgresql/data
+volumes:
+  pgpc_data:
